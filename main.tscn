@@ -16,8 +16,6 @@ size = Vector2(10, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
 size = Vector3(10, 0.1, 10)
 
-[sub_resource type="BoxMesh" id="BoxMesh_bs02e"]
-
 [node name="Main" type="Node3D" unique_id=7031118]
 script = ExtResource("1_ig7tw")
 
@@ -30,17 +28,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
 
-[node name="LeftHand" parent="XROrigin3D/LeftHand" instance=ExtResource("2_lhand")]
+[node name="LeftHand" parent="XROrigin3D/LeftHand" unique_id=1628027176 instance=ExtResource("2_lhand")]
 
-[node name="FunctionPickup" parent="XROrigin3D/LeftHand" instance=ExtResource("4_pickup")]
+[node name="FunctionPickup" parent="XROrigin3D/LeftHand" unique_id=2000590611 instance=ExtResource("4_pickup")]
 
 [node name="RightHand" type="XRController3D" parent="XROrigin3D" unique_id=1615416643]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
 
-[node name="RightHand" parent="XROrigin3D/RightHand" instance=ExtResource("3_rhand")]
+[node name="RightHand" parent="XROrigin3D/RightHand" unique_id=1111069464 instance=ExtResource("3_rhand")]
 
-[node name="FunctionPickup" parent="XROrigin3D/RightHand" instance=ExtResource("4_pickup")]
+[node name="FunctionPickup" parent="XROrigin3D/RightHand" unique_id=2036616416 instance=ExtResource("4_pickup")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1988570641]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02439797, 0.3421688, 0)
@@ -51,27 +49,22 @@ environment = SubResource("Environment_bs02e")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=150094302]
 mesh = SubResource("PlaneMesh_bs02e")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=717980868]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
-mesh = SubResource("BoxMesh_bs02e")
-
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1485148480]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=664445652]
 shape = SubResource("BoxShape3D_floor")
 
-[node name="OrbCyan" parent="." instance=ExtResource("5_orb")]
+[node name="OrbCyan" parent="." unique_id=2092587135 instance=ExtResource("5_orb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 1.2, -0.5)
-colour_name = "cyan"
 
-[node name="OrbMagenta" parent="." instance=ExtResource("5_orb")]
+[node name="OrbMagenta" parent="." unique_id=718602050 instance=ExtResource("5_orb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.2, -0.5)
 colour_name = "magenta"
 
-[node name="OrbYellow" parent="." instance=ExtResource("5_orb")]
+[node name="OrbYellow" parent="." unique_id=2123349590 instance=ExtResource("5_orb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.2, -0.5)
 colour_name = "yellow"
 
-[node name="Bowl" parent="." instance=ExtResource("6_bowl")]
+[node name="Bowl" parent="." unique_id=906759427 instance=ExtResource("6_bowl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, -0.5)
