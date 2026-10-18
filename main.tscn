@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://scenes/orb.tscn" id="5_orb"]
 
 [sub_resource type="Environment" id="Environment_bs02e"]
+glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bs02e"]
 size = Vector2(10, 10)
