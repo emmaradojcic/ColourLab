@@ -1,12 +1,9 @@
 [gd_scene format=3 uid="uid://ban7jkmiixxav"]
 
 [ext_resource type="Script" uid="uid://dag7k4herc2y1" path="res://Script1.gd" id="1_ig7tw"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_ram8i"]
-size = Vector3(0.1, 0.1, 0.1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_5j0pe"]
-size = Vector3(0.1, 0.1, 0.1)
+[ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="2_lhand"]
+[ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="3_rhand"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="4_pickup"]
 
 [sub_resource type="Environment" id="Environment_bs02e"]
 
@@ -27,16 +24,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftHand" unique_id=1266412801]
-mesh = SubResource("BoxMesh_ram8i")
+[node name="LeftHand" parent="XROrigin3D/LeftHand" instance=ExtResource("2_lhand")]
+
+[node name="FunctionPickup" parent="XROrigin3D/LeftHand" instance=ExtResource("4_pickup")]
 
 [node name="RightHand" type="XRController3D" parent="XROrigin3D" unique_id=1615416643]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightHand" unique_id=1053685031]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0536804, -11.55714, -5.2462177)
-mesh = SubResource("BoxMesh_5j0pe")
+[node name="RightHand" parent="XROrigin3D/RightHand" instance=ExtResource("3_rhand")]
+
+[node name="FunctionPickup" parent="XROrigin3D/RightHand" instance=ExtResource("4_pickup")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1988570641]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02439797, 0.3421688, 0)
