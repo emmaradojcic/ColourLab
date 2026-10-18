@@ -31,9 +31,9 @@ top_radius = 0.121
 bottom_radius = 0.121
 height = 0.005
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_bowl"]
-height = 0.81
-radius = 0.2
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_stand"]
+height = 0.76
+radius = 0.12
 
 [node name="Bowl" type="Node3D"]
 
@@ -43,6 +43,7 @@ mesh = SubResource("CylinderMesh_stand")
 
 [node name="BowlShape" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84, 0)
+use_collision = true
 
 [node name="Outside" type="CSGMesh3D" parent="BowlShape"]
 mesh = SubResource("CylinderMesh_outside")
@@ -58,8 +59,8 @@ material = SubResource("StandardMaterial3D_bowl")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81, 0)
 mesh = SubResource("CylinderMesh_liquid")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.405, 0)
+[node name="StandBody" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("CylinderShape3D_bowl")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StandBody"]
+shape = SubResource("CylinderShape3D_stand")
