@@ -1,3 +1,4 @@
+class_name Bowl
 extends Node3D
 
 # The mixing bowl. It catches orbs that are dropped into it.
@@ -53,9 +54,7 @@ func add_orb(orb):
 
 # Work out the mixed colour and show it on the liquid.
 func update_liquid():
-	var mixed_colour = EMPTY_COLOUR
-	if not amounts.is_empty():
-		mixed_colour = ColourMixer.mix_paint(amounts)
+	var mixed_colour = get_colour()
 
 	# Stop the old fade if a new orb lands before it finishes.
 	if colour_tween:
@@ -64,6 +63,13 @@ func update_liquid():
 	# Fade smoothly from the current colour to the new one.
 	colour_tween = create_tween()
 	colour_tween.tween_property(liquid_material, "albedo_color", mixed_colour, colour_fade_time)
+
+
+# The colour of what is in the bowl right now.
+func get_colour():
+	if amounts.is_empty():
+		return EMPTY_COLOUR
+	return ColourMixer.mix_paint(amounts)
 
 
 # Throw away everything in the bowl.

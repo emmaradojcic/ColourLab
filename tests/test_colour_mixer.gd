@@ -15,6 +15,12 @@ func _ready():
 	check("2 cyan + 2 yellow = same green", {"cyan": 2, "yellow": 2}, Color(0, 1, 0))
 	check("just cyan = cyan", {"cyan": 3}, Color(0, 1, 1))
 	check("empty bowl = white", {}, Color(1, 1, 1))
+
+	print("--- Score tests ---")
+	check_score("same colour = 100", Color(0, 1, 0), Color(0, 1, 0), 100)
+	check_score("black vs white = 0", Color(0, 0, 0), Color(1, 1, 1), 0)
+	check_score("red vs orange = 50", Color(1, 0, 0), Color(1, 0.5, 0), 50)
+	check_score("nearly the same = 90", Color(1, 0.4, 0), Color(1, 0.5, 0), 90)
 	print("--- Tests finished ---")
 	# Close the test window, we only need the Output.
 	get_tree().quit()
@@ -24,6 +30,15 @@ func _ready():
 func check(test_name, amounts, expected):
 	var result = ColourMixer.mix_paint(amounts)
 	if result.is_equal_approx(expected):
+		print("PASS  ", test_name)
+	else:
+		print("FAIL  ", test_name, "  got ", result, " expected ", expected)
+
+
+# Score two colours and say PASS or FAIL.
+func check_score(test_name, made, target, expected):
+	var result = ColourMixer.score(made, target)
+	if result == expected:
 		print("PASS  ", test_name)
 	else:
 		print("FAIL  ", test_name, "  got ", result, " expected ", expected)

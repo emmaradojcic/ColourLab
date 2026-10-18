@@ -14,6 +14,7 @@ var target_colour: Color
 
 @onready var swatch = $Swatch
 @onready var name_label = $NameLabel
+@onready var result_label = $ResultLabel
 
 # Our own copy of the swatch material, so we can change its colour.
 var swatch_material
@@ -33,3 +34,10 @@ func show_target(new_name, new_amounts):
 	target_colour = ColourMixer.mix_paint(target_amounts)
 	swatch_material.albedo_color = target_colour
 	name_label.text = target_name
+	# A new target means the old result no longer applies.
+	result_label.text = ""
+
+
+# Show how well the player did, under the sign.
+func show_result(text):
+	result_label.text = text
