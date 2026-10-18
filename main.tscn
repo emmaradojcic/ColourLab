@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://scenes/bowl.tscn" id="6_bowl"]
 [ext_resource type="PackedScene" path="res://scenes/fingertip.tscn" id="7_tip"]
 [ext_resource type="PackedScene" path="res://scenes/press_button.tscn" id="8_button"]
+[ext_resource type="PackedScene" path="res://scenes/stand.tscn" id="9_stand"]
 
 [sub_resource type="Environment" id="Environment_bs02e"]
 glow_enabled = true
@@ -77,8 +78,11 @@ colour_name = "yellow"
 [node name="Bowl" parent="." unique_id=906759427 instance=ExtResource("6_bowl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, -0.5)
 
-[node name="EmptyButton" parent="." instance=ExtResource("8_button")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.92, -0.5)
+[node name="EmptyStand" parent="." instance=ExtResource("9_stand")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0, -0.5)
+
+[node name="EmptyButton" parent="EmptyStand" instance=ExtResource("8_button")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0)
 label_text = "Empty"
 
-[connection signal="button_pressed" from="EmptyButton" to="Bowl" method="_on_empty_button_pressed"]
+[connection signal="button_pressed" from="EmptyStand/EmptyButton" to="Bowl" method="_on_empty_button_pressed"]
