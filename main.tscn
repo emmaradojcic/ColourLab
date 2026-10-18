@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="3_rhand"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="4_pickup"]
 [ext_resource type="PackedScene" path="res://scenes/orb.tscn" id="5_orb"]
+[ext_resource type="PackedScene" path="res://scenes/bowl.tscn" id="6_bowl"]
 
 [sub_resource type="Environment" id="Environment_bs02e"]
 glow_enabled = true
@@ -71,3 +72,6 @@ colour_name = "magenta"
 [node name="OrbYellow" parent="." instance=ExtResource("5_orb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.2, -0.5)
 colour_name = "yellow"
+
+[node name="Bowl" parent="." instance=ExtResource("6_bowl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, -0.5)
