@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://cajtkuersa6n4" path="res://tests/test_colour_mixer.gd" id="1_test"]
+
+[node name="TestColourMixer" type="Node"]
+script = ExtResource("1_test")
