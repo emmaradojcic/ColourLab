@@ -4,11 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="2_lhand"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="3_rhand"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="4_pickup"]
+[ext_resource type="PackedScene" path="res://scenes/orb.tscn" id="5_orb"]
 
 [sub_resource type="Environment" id="Environment_bs02e"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bs02e"]
 size = Vector2(10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(10, 0.1, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_bs02e"]
 
@@ -48,3 +52,12 @@ mesh = SubResource("PlaneMesh_bs02e")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=717980868]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
 mesh = SubResource("BoxMesh_bs02e")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="Orb" parent="." instance=ExtResource("5_orb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.2, -0.5)

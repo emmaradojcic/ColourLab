@@ -1,0 +1,28 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="1_pickable"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_orb"]
+radius = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_orb"]
+albedo_color = Color(1, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_orb"]
+material = SubResource("StandardMaterial3D_orb")
+radius = 0.05
+height = 0.1
+
+[node name="Orb" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 196615
+freeze = true
+freeze_mode = 1
+script = ExtResource("1_pickable")
+release_mode = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_orb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_orb")
