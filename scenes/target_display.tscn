@@ -1,0 +1,42 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/target_display.gd" id="1_target"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_board"]
+albedo_color = Color(0.15, 0.15, 0.17, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_board"]
+material = SubResource("StandardMaterial3D_board")
+size = Vector3(0.3, 0.34, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swatch"]
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_swatch"]
+material = SubResource("StandardMaterial3D_swatch")
+size = Vector2(0.16, 0.16)
+
+[node name="TargetDisplay" type="Node3D"]
+script = ExtResource("1_target")
+
+[node name="Board" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_board")
+
+[node name="Swatch" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.011)
+mesh = SubResource("QuadMesh_swatch")
+
+[node name="TitleLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0.011)
+pixel_size = 0.001
+text = "Make this colour:"
+font_size = 32
+outline_size = 6
+
+[node name="NameLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13, 0.011)
+pixel_size = 0.001
+text = "Green"
+font_size = 40
+outline_size = 6
