@@ -1,5 +1,7 @@
 [gd_scene format=3]
 
+[ext_resource type="Script" path="res://scripts/bowl.gd" id="1_bowl"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_stand"]
 albedo_color = Color(0.25, 0.25, 0.28, 1)
 
@@ -31,11 +33,16 @@ top_radius = 0.121
 bottom_radius = 0.121
 height = 0.005
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_catcher"]
+height = 0.12
+radius = 0.17
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_stand"]
 height = 0.76
 radius = 0.12
 
 [node name="Bowl" type="Node3D"]
+script = ExtResource("1_bowl")
 
 [node name="Stand" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
@@ -64,3 +71,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StandBody"]
 shape = SubResource("CylinderShape3D_stand")
+
+[node name="Catcher" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.835, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Catcher"]
+shape = SubResource("CylinderShape3D_catcher")

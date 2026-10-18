@@ -1,3 +1,4 @@
+class_name Orb
 extends XRToolsPickable
 
 # A glowing orb of colour that the player can pick up.
