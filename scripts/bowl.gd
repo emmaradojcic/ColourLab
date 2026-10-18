@@ -11,9 +11,8 @@ signal colour_added(colour_name)
 func _physics_process(_delta):
 	# Check every orb that is inside the bowl right now.
 	for body in catcher.get_overlapping_bodies():
-		# Only take orbs, only once the player has let go,
-		# and not ones we are already removing.
-		if body is Orb and not body.is_picked_up() and not body.is_queued_for_deletion():
+		# Only take orbs that are loose (not held or floating at home).
+		if body is Orb and body.is_loose():
 			add_orb(body)
 
 
@@ -21,5 +20,5 @@ func _physics_process(_delta):
 func add_orb(orb):
 	print("Added ", orb.colour_name)
 	colour_added.emit(orb.colour_name)
-	# Remove the orb from the game.
-	orb.queue_free()
+	# Send the orb back to its starting spot.
+	orb.respawn()

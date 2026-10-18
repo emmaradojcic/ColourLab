@@ -19,11 +19,22 @@ const COLOURS = {
 @export_enum("cyan", "magenta", "yellow", "red", "green", "blue", "white", "black")
 var colour_name: String = "cyan"
 
+# Where the orb floats when it is waiting to be picked up.
+var home_transform: Transform3D
+
+@onready var respawn_timer = $RespawnTimer
+
 
 func _ready():
 	# Run the XR Tools pickable setup first.
 	super()
 	set_colour()
+	home_transform = global_transform
+
+	# Listen to our own XR Tools signals and the timer.
+	dropped.connect(_on_dropped)
+	picked_up.connect(_on_picked_up)
+	respawn_timer.timeout.connect(respawn)
 
 
 # Paint the orb in its colour.
@@ -34,3 +45,28 @@ func set_colour():
 	material.albedo_color = COLOURS[colour_name]
 	material.emission = COLOURS[colour_name]
 	mesh.material_override = material
+
+
+# True when the orb is falling or rolling freely.
+# It is not loose while held or while floating at home (both are frozen).
+func is_loose():
+	return not freeze
+
+
+# Put the orb back where it started, floating and still.
+func respawn():
+	respawn_timer.stop()
+	freeze = true
+	linear_velocity = Vector3.ZERO
+	angular_velocity = Vector3.ZERO
+	global_transform = home_transform
+
+
+# When the player lets go, start the countdown to go home.
+func _on_dropped(_pickable):
+	respawn_timer.start()
+
+
+# If the player grabs it again, cancel the countdown.
+func _on_picked_up(_pickable):
+	respawn_timer.stop()
