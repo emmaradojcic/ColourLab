@@ -8,6 +8,9 @@ signal colour_added(colour_name)
 # How many seconds before an orb comes back after going in the bowl.
 @export var orb_return_wait: float = 1.5
 
+# How many seconds the liquid takes to fade to a new colour.
+@export var colour_fade_time: float = 0.6
+
 @onready var catcher = $Catcher
 @onready var liquid = $Liquid
 
@@ -16,6 +19,9 @@ var amounts = {}
 
 # Our own copy of the liquid material, so we can change its colour.
 var liquid_material
+
+# The fade that is playing right now, if any.
+var colour_tween
 
 
 func _ready():
@@ -45,4 +51,11 @@ func add_orb(orb):
 # Work out the mixed colour and show it on the liquid.
 func update_liquid():
 	var mixed_colour = ColourMixer.mix_paint(amounts)
-	liquid_material.albedo_color = mixed_colour
+
+	# Stop the old fade if a new orb lands before it finishes.
+	if colour_tween:
+		colour_tween.kill()
+
+	# Fade smoothly from the current colour to the new one.
+	colour_tween = create_tween()
+	colour_tween.tween_property(liquid_material, "albedo_color", mixed_colour, colour_fade_time)
