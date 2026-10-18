@@ -19,6 +19,9 @@ const COLOURS = {
 @export_enum("cyan", "magenta", "yellow", "red", "green", "blue", "white", "black")
 var colour_name: String = "cyan"
 
+# How many seconds an orb waits on the floor before going home.
+@export var drop_wait: float = 3.0
+
 # Where the orb floats when it is waiting to be picked up.
 var home_transform: Transform3D
 
@@ -56,15 +59,27 @@ func is_loose():
 # Put the orb back where it started, floating and still.
 func respawn():
 	respawn_timer.stop()
+	visible = true
+	enabled = true
 	freeze = true
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 	global_transform = home_transform
 
 
+# Hide the orb, then bring it back home after a short wait.
+func respawn_later(wait_seconds):
+	visible = false
+	# Stop hands grabbing it while it is hidden.
+	enabled = false
+	# Freeze it so it stops moving and the bowl does not count it again.
+	freeze = true
+	respawn_timer.start(wait_seconds)
+
+
 # When the player lets go, start the countdown to go home.
 func _on_dropped(_pickable):
-	respawn_timer.start()
+	respawn_timer.start(drop_wait)
 
 
 # If the player grabs it again, cancel the countdown.

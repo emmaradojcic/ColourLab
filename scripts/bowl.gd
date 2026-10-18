@@ -5,6 +5,9 @@ extends Node3D
 # Sent when an orb lands in the bowl. Other scripts can listen for this.
 signal colour_added(colour_name)
 
+# How many seconds before an orb comes back after going in the bowl.
+@export var orb_return_wait: float = 1.5
+
 @onready var catcher = $Catcher
 
 
@@ -20,5 +23,5 @@ func _physics_process(_delta):
 func add_orb(orb):
 	print("Added ", orb.colour_name)
 	colour_added.emit(orb.colour_name)
-	# Send the orb back to its starting spot.
-	orb.respawn()
+	# Hide the orb and send it back to its starting spot soon.
+	orb.respawn_later(orb_return_wait)
