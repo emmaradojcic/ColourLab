@@ -1,0 +1,48 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/press_button.gd" id="1_button"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_base"]
+albedo_color = Color(0.2, 0.2, 0.22, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_base"]
+material = SubResource("StandardMaterial3D_base")
+size = Vector3(0.1, 0.02, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_top"]
+albedo_color = Color(0.85, 0.2, 0.2, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_top"]
+material = SubResource("StandardMaterial3D_top")
+top_radius = 0.035
+bottom_radius = 0.035
+height = 0.02
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_press"]
+size = Vector3(0.07, 0.03, 0.07)
+
+[node name="PressButton" type="Area3D"]
+collision_layer = 0
+collision_mask = 131072
+script = ExtResource("1_button")
+button = NodePath("ButtonTop")
+displacement = Vector3(0, -0.01, 0)
+
+[node name="Base" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_base")
+
+[node name="ButtonTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0)
+mesh = SubResource("CylinderMesh_top")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+shape = SubResource("BoxShape3D_press")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+billboard = 1
+pixel_size = 0.001
+text = "Button"
+font_size = 48
+outline_size = 8

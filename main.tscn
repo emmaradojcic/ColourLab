@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="4_pickup"]
 [ext_resource type="PackedScene" path="res://scenes/orb.tscn" id="5_orb"]
 [ext_resource type="PackedScene" path="res://scenes/bowl.tscn" id="6_bowl"]
+[ext_resource type="PackedScene" path="res://scenes/fingertip.tscn" id="7_tip"]
+[ext_resource type="PackedScene" path="res://scenes/press_button.tscn" id="8_button"]
 
 [sub_resource type="Environment" id="Environment_bs02e"]
 glow_enabled = true
@@ -32,6 +34,9 @@ tracker = &"left_hand"
 
 [node name="FunctionPickup" parent="XROrigin3D/LeftHand" unique_id=2000590611 instance=ExtResource("4_pickup")]
 
+[node name="Fingertip" parent="XROrigin3D/LeftHand" instance=ExtResource("7_tip")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, -0.1)
+
 [node name="RightHand" type="XRController3D" parent="XROrigin3D" unique_id=1615416643]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
@@ -39,6 +44,9 @@ tracker = &"right_hand"
 [node name="RightHand" parent="XROrigin3D/RightHand" unique_id=1111069464 instance=ExtResource("3_rhand")]
 
 [node name="FunctionPickup" parent="XROrigin3D/RightHand" unique_id=2036616416 instance=ExtResource("4_pickup")]
+
+[node name="Fingertip" parent="XROrigin3D/RightHand" instance=ExtResource("7_tip")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, -0.1)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1988570641]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02439797, 0.3421688, 0)
@@ -68,3 +76,9 @@ colour_name = "yellow"
 
 [node name="Bowl" parent="." unique_id=906759427 instance=ExtResource("6_bowl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, -0.5)
+
+[node name="EmptyButton" parent="." instance=ExtResource("8_button")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.92, -0.5)
+label_text = "Empty"
+
+[connection signal="button_pressed" from="EmptyButton" to="Bowl" method="_on_empty_button_pressed"]

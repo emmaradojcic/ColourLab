@@ -11,6 +11,9 @@ signal colour_added(colour_name)
 # How many seconds the liquid takes to fade to a new colour.
 @export var colour_fade_time: float = 0.6
 
+# The colour of the liquid when the bowl is empty.
+const EMPTY_COLOUR = Color(0.6, 0.6, 0.6)
+
 @onready var catcher = $Catcher
 @onready var liquid = $Liquid
 
@@ -50,7 +53,9 @@ func add_orb(orb):
 
 # Work out the mixed colour and show it on the liquid.
 func update_liquid():
-	var mixed_colour = ColourMixer.mix_paint(amounts)
+	var mixed_colour = EMPTY_COLOUR
+	if not amounts.is_empty():
+		mixed_colour = ColourMixer.mix_paint(amounts)
 
 	# Stop the old fade if a new orb lands before it finishes.
 	if colour_tween:
@@ -59,3 +64,15 @@ func update_liquid():
 	# Fade smoothly from the current colour to the new one.
 	colour_tween = create_tween()
 	colour_tween.tween_property(liquid_material, "albedo_color", mixed_colour, colour_fade_time)
+
+
+# Throw away everything in the bowl.
+func empty():
+	amounts = {}
+	print("Bowl emptied")
+	update_liquid()
+
+
+# Called by the Empty button's signal (connected in main.tscn).
+func _on_empty_button_pressed(_button):
+	empty()
