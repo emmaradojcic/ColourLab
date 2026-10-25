@@ -12,6 +12,8 @@ Video:
 
 Colour Lab is an XR learning experience for the Meta Quest 3 that teaches how colour mixing works, and why mixing light is different from mixing paint. Glowing orbs of colour float in the learner's own room in passthrough. They drop them into a mixing bowl to match target colours, starting with paint (cyan, magenta and yellow), then discovering that light (red, green and blue) follows completely different rules.
 
+**Proposal:** [jump to proposal](#proposal)
+
 # Instructions for use
 
 # How it works
